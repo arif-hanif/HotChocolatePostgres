@@ -17,7 +17,7 @@ namespace HotChocolatePostgres
 
             services
                 .AddPooledDbContextFactory<AppDbContext>(
-                    options => options.UseNpgsql("Data Source=conferences.db"))
+                    options => options.UseNpgsql("Host=localhost;Database=sandbox01;Username=user;Password=password1"))
                 .AddRouting()
                 .AddGraphQLServer()
                     .AddQueryType<Query>();

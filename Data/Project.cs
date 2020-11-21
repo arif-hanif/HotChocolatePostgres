@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotChocolatePostgres.Data
@@ -13,20 +12,20 @@ namespace HotChocolatePostgres.Data
         public string? Name { get; set; }
 
         [Column(TypeName = "jsonb")]
-        public ProjectLocation? Location { get; set; }
+        public Customer? Customer { get; set; }
 
     }
 
-    public class ProjectLocation
+    public class Customer    // Mapped to a JSON column in the table
     {
-        public double Lat { get; set; }
-        public double Lon { get; set; }
-        public ProjectAddress? Address { get; set; }
+        public string? Name { get; set; }
+        public int Age { get; set; }
+        public Order[]? Orders { get; set; }
     }
 
-    public class ProjectAddress
+    public class Order       // Part of the JSON column
     {
-        public string? Country { get; set; }
-        public string? City { get; set; }
+        public decimal Price { get; set; }
+        public string? ShippingAddress { get; set; }
     }
 }
