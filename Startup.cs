@@ -1,4 +1,6 @@
 using HotChocolatePostgres.Data;
+using  HotChocolate;
+using HotChocolate.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +19,13 @@ namespace HotChocolatePostgres
 
             services
                 .AddPooledDbContextFactory<AppDbContext>(
-                    options => options.UseNpgsql("Host=localhost;Database=sandbox01;Username=user;Password=password1"))
+                    options => options.UseNpgsql(
+                        "Host=localhost;Database=sandbox01;Username=user;Password=password1"))
                 .AddRouting()
                 .AddGraphQLServer()
-                    .AddQueryType<Query>();
+                .AddQueryType<Query>()
+                .AddProjections()
+                .AddPostgresProjections();
 
         }
 
